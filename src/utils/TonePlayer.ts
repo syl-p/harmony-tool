@@ -1,22 +1,33 @@
 import * as Tone from "tone";
 
 const C_DIATONIC_SCALE = ["C", "D", "E", "F", "G", "A", "B"];
-const SYNTH = new Tone.Synth().toDestination();
-const POLY_SYNTH = new Tone.PolySynth().toDestination();
 
 export default class TonePlayer {
+  private synth: Tone.Synth | null = null;
+  private polySynth: Tone.PolySynth | null = null;
+
   constructor() {}
+
+  private getSynth(): Tone.Synth {
+    if (!this.synth) this.synth = new Tone.Synth().toDestination();
+    return this.synth;
+  }
+
+  private getPolySynth(): Tone.PolySynth {
+    if (!this.polySynth) this.polySynth = new Tone.PolySynth().toDestination();
+    return this.polySynth;
+  }
 
   public play_chord(notes: string[]) {
     const now = Tone.now();
     this.play_note_by_note(notes, now);
-    POLY_SYNTH.triggerAttackRelease(this.getPlayables(notes), 1, now + 2);
+    this.getPolySynth().triggerAttackRelease(this.getPlayables(notes), 1, now + 2);
   }
 
   public play_note_by_note(notes: string[], time?: number) {
     const now = time ? time : Tone.now();
     this.getPlayables(notes).forEach((note, index) => {
-      SYNTH.triggerAttackRelease(note, "8n", now + index / 2, 0.6);
+      this.getSynth().triggerAttackRelease(note, "8n", now + index / 2, 0.6);
     });
   }
 
