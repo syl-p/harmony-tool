@@ -7,6 +7,10 @@ const route = useRoute();
 const activeKey = computed(() => String(route.params.key ?? "C"));
 const activeType = computed(() => String(route.params.type ?? "major"));
 
+const activeTypeLabel = computed(
+  () => types.find((t) => t.value === activeType.value)?.label ?? activeType.value,
+);
+
 const keys = [
   "F",
   "C",
@@ -23,7 +27,12 @@ const keys = [
   "Cb",
 ];
 
-const types = ["major", "harmonic minor", "diminished", "augmented"];
+const types = [
+  { value: "major", label: "majeur" },
+  { value: "harmonic minor", label: "mineur harmonique" },
+  { value: "diminished", label: "diminué" },
+  { value: "augmented", label: "augmenté" },
+];
 </script>
 
 <template>
@@ -35,15 +44,15 @@ const types = ["major", "harmonic minor", "diminished", "augmented"];
         </RouterLink>
         <ViewSelect />
       </div>
-      <nav class="chips chips--types" aria-label="Type de gamme">
+      <nav class="chips chips--types" aria-label="Type de mode">
         <RouterLink
           v-for="type in types"
-          :key="type"
+          :key="type.value"
           class="chip"
-          :class="{ 'chip--active': type === activeType }"
-          :to="{ name: 'tone', params: { key: activeKey, type } }"
+          :class="{ 'chip--active': type.value === activeType }"
+          :to="{ name: 'tone', params: { key: activeKey, type: type.value } }"
         >
-          {{ type }}
+          {{ type.label }}
         </RouterLink>
       </nav>
     </header>
@@ -51,7 +60,7 @@ const types = ["major", "harmonic minor", "diminished", "augmented"];
     <main class="main">
       <section class="hero">
         <h1 class="hero__tonic">{{ activeKey }}</h1>
-        <p class="hero__type">{{ activeType }}</p>
+        <p class="hero__type">{{ activeTypeLabel }}</p>
       </section>
 
       <nav class="chips chips--keys" aria-label="Tonalité">
@@ -73,12 +82,18 @@ const types = ["major", "harmonic minor", "diminished", "augmented"];
 
     <footer class="footer">
       <p>
-        Built with <span class="footer__heart">♥</span> by
+        Construit avec <span class="footer__heart">♥</span> par
         <a
           target="_blank"
           rel="noopener"
           href="https://www.linkedin.com/in/websylvain/"
           >Sylvain Pastor</a
+        > ·
+        <a
+          target="_blank"
+          rel="noopener"
+          href="https://github.com/syl-p/harmony-tool"
+          >Code sur GitHub</a
         >.
       </p>
     </footer>

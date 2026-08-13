@@ -1,7 +1,7 @@
 <template>
   <select v-model="view" aria-label="Mode de lecture">
-    <option value="scale">Scale</option>
-    <option value="chord">Chords</option>
+    <option value="modes">Modes</option>
+    <option value="chords">Accords</option>
   </select>
 </template>
 

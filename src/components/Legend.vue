@@ -31,6 +31,19 @@ const qualities = [
       fondamentale étant surlignée.
     </p>
 
+    <h4 class="legend__subtitle">Type de vue</h4>
+    <div class="legend__views">
+      <p>
+        <strong>Modes</strong>: écoute le mode note par note et met la
+        fondamentale en avant.
+      </p>
+      <p>
+        <strong>Accords</strong>: écoute l'accord (les 4 notes du degré sont
+        surlignées, les autres estompées).
+      </p>
+    </div>
+
+    <h4 class="legend__subtitle">Code couleur</h4>
     <ul class="legend__qualities">
       <li v-for="q in qualities" :key="q.name" class="legend__quality">
         <span class="legend__swatch" :style="{ background: q.color }"></span>
@@ -38,17 +51,6 @@ const qualities = [
         <span class="legend__degrees">{{ q.degrees }}</span>
       </li>
     </ul>
-
-    <div class="legend__views">
-      <p>
-        <strong>Scale</strong>: écoute la gamme note par note et met la
-        fondamentale en avant.
-      </p>
-      <p>
-        <strong>Chords</strong>: écoute l'accord (les 4 notes du degré sont
-        surlignées, les autres estompées).
-      </p>
-    </div>
   </section>
 </template>
 
@@ -67,6 +69,12 @@ const qualities = [
   letter-spacing: 0.25em;
   color: var(--text);
   margin-bottom: 0.75rem;
+}
+
+.legend__subtitle {
+  font-size: 0.9rem;
+  color: var(--text);
+  margin: 1.25rem 0 0.5rem;
 }
 
 .legend__intro {
@@ -114,6 +122,7 @@ const qualities = [
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem 2rem;
+  margin-bottom: 1.25rem;
 }
 
 .legend__views p {

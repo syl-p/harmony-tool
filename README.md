@@ -4,10 +4,11 @@ Outil de théorie musicale : explorez les degrés d'une gamme, leurs modes et le
 
 ## Fonctionnalités
 
-- 13 tonalités (de `F` à `Cb`) × 4 types de gammes : **major**, **harmonic minor**, **diminished**, **augmented**
+- 13 tonalités (de `F` à `Cb`) × 4 types de modes : **majeur**, **mineur harmonique**, **diminué**, **augmenté**
 - Affichage des 7 degrés avec chiffrement romain (`I` → `VII`), mode et accord correspondant
 - Colorisation de chaque degré selon la qualité de l'accord (majeure, dominante, mineure, diminuée, augmentée)
-- Lecture audio de chaque degré : notes de la gamme en arpège, puis l'accord (Tone.js)
+- Deux vues par degré : **Modes** (les 7 notes du mode) et **Accords** (les 4 notes de l'accord)
+- Lecture audio de chaque degré : le mode note par note ou l'accord (Tone.js)
 - Navigation partageable via l'URL (`/#/C/harmonic%20minor`)
 
 ## Stack technique
@@ -40,7 +41,7 @@ src/
 │   └── TonePlayer.ts       # lecture des notes/accords via Tone.js
 ├── tests/unit/             # tests Vitest
 ├── views/
-│   └── ToneView.vue        # liste des degrés de la gamme active
+│   └── ToneView.vue        # liste des degrés/modes de la gamme active
 ├── router.ts
 └── App.vue                 # en-tête, tonalités, types de gamme, pied de page
 ```
